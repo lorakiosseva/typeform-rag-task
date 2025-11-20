@@ -38,9 +38,13 @@ The solution is not containerised wiht Docker due to config issues and time cons
 
 ```
 
-How to run the project locally without Docker:
+## How to run the project locally without Docker:
 
-Crete your own .env file, using the .env.example and putting your own API keys.
+Clone the repo, create and activate a virtual environent, install dependencies from the requirements file
+
+```pip install -r requirements.txt```
+
+Crete your own .env file, using the .env.example and add your own API keys.
 
 ```cp .env.example .env```
 
@@ -51,11 +55,11 @@ Do a one-time ingestion to populate pinecone. This:
 - Embeds each chunk
 - Upserts all vectors into Pinecone
 
-You can run: 
+In the project root dir run: 
 
 ```python -c "from app.ingest import run_ingestion_once; run_ingestion_once()"```
 
-You should see print statements stating that 2 articleas have been loaded, 14 chunks have been build and an upsert response
+You should see print statements stating that 2 articles have been loaded, 14 chunks have been build, and an upsert response.
 
 Then you can start the FastAPI app. From the project root run: 
 
@@ -72,7 +76,6 @@ Example request:
   "top_k": 5
 }
 ```
-
 
 
 ## Summary of design decisions:
@@ -140,5 +143,3 @@ Must implement better evaluation. Suggestions:
 - Introduce confidence scoring based on retrieval similarity and LLM uncertainty.
 - Monitor observability metrics like latency, token usage, retrieval failures, and hallucination rate in a dashboard.
 - Run robustness tests (paraphrases, ambiguous queries, multilingual inputs) to stress-test reliability.
-
-
