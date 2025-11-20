@@ -1,5 +1,3 @@
-# app/api.py
-
 from typing import List, Optional
 
 from fastapi import FastAPI, HTTPException
